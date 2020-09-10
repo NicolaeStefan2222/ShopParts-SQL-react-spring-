@@ -1,0 +1,31 @@
+.text-block{
+    background:rgb(241, 241, 241);
+    text-align: center;
+    padding: 30px;
+}
+.text-block-content{
+    max-width: 600px;
+    margin: auto;
+}
+.text-block-title{
+    color:#72266a;
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-size:23px;
+}
+.text-block-description{
+font-size: 20px;
+font-family: 'Cormorant Garamond', sans-serif;
+color: #72266a;
+}
+.text-block-button{
+background: white;
+border: 1px solid #72266a;
+padding: 15px 30px;
+border-radius: 25px;
+color: #72266a;
+cursor: pointer;
+}
+.text-block-button:hover{
+    background: #72266a;
+    color: white;
+}

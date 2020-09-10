@@ -1,0 +1,25 @@
+.header{
+    background: #ccc;
+    border-top: 4px solid #72266a;
+}
+.header-logo{
+    width: 100px;
+    padding-top: 20px;
+    padding-left: 40px;
+}
+.header-nav{
+    float: right;  
+    margin-right: 50px;
+}
+.header-nav-link{
+    font-size: 20px;
+    text-decoration: none;
+    padding:35px 20px 35px 20px ;
+    display: inline-block;
+    color: #72266a;
+    font-family: 'Cormorant Garamond', sans-serif;
+}
+.header-nav-link.selected,
+.header-nav-link:hover{
+    border-bottom: 4px solid #72266a;
+}

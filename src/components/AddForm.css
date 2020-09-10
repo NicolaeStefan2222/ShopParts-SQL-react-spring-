@@ -1,0 +1,37 @@
+.contact-form{
+    max-width: 800px;
+    margin:auto;
+    padding: 10px;
+}
+.form-label{
+   display: block;
+   padding: 5px 0; 
+   
+}
+.form-element{
+    display: block;
+    width: 30%;
+    padding: 5px;
+    border: 1px solid #72266a;
+
+}
+
+.form-button{
+background: white;
+border: 1px solid #72266a;
+padding: 15px 30px;
+border-radius: 25px;
+color: #72266a;
+cursor: pointer;
+}
+.form-button:hover{
+    background: #72266a;
+    color: white;
+}
+.form-row{
+    margin-bottom: 5px;
+}
+.admin{
+    color: red;
+    text-align: center;
+}
