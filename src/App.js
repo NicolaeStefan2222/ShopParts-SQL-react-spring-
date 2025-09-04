@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import Homepage from './pages/Homepage';
 import AddProducts from './pages/AddProducts';
-import AllProductsDB from './pages/AllProductsDB';
+
+import AllProductsDB from './components/AllProductsDB';
 import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
 import YourCartPage from './pages/YourCartPage';
 

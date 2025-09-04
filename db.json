@@ -1,0 +1,12 @@
+{
+  "produs": [
+    {
+      "id": "9fc4",
+      "descriere": "Bec",
+      "pret": 44,
+      "tipID": 1,
+      "categorieID": 3,
+      "data_Adaugarii": "2025-09-04T17:40"
+    }
+  ]
+}

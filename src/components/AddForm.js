@@ -11,82 +11,90 @@ class AddForm extends React.Component {
     };
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
 
-    var formData = new FormData(event.target);
-    var data = {};
+    const form = event.currentTarget; // <— salvezi referința la <form>
+    const formData = new FormData(form);
 
-    var data = {
-      produsID: formData.get("produsID"),
-      descriere: formData.get("descriere"),
-      pret: formData.get("pret"),
-      tipID: formData.get("tipID"),
-      categorieID: formData.get("categorieID"),
+    const payload = {
+      descriere: formData.get("descriere")?.trim(),
+      pret: Number(formData.get("pret")),
+      tipID: Number(formData.get("tipID")),
+      categorieID: Number(formData.get("categorieID")),
       data_Adaugarii: formData.get("data_Adaugarii"),
     };
 
-    var self = this;
-
-    fetch("http://localhost:8080/produs/add", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.text();
-      })
-      .then(function (response) {
-        self.setState({
-          status: response,
-        });
+    try {
+      const res = await fetch("http://localhost:8080/produs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const created = await res.json();
+
+      this.setState({ status: `Produs adăugat (#${created.id}) ✅` });
+      form.reset(); // <— folosești referința salvată
+    } catch (err) {
+      this.setState({ status: `Eroare: ${String(err)}` });
+    }
   }
 
   render() {
     return (
       <div className="contact-form">
-        <h3 className="admin">Only admin is allowed to enter data here !! &#128517; </h3>
-        <form action="" onSubmit={this.handleSubmit}>
+        <h3 className="admin">
+          Only admin is allowed to enter data here !! 🥳
+        </h3>
+
+        <form onSubmit={this.handleSubmit} noValidate>
           <div className="form-row">
-            <label className="form-label">Denumire produs</label>
+            <label className="form-label" htmlFor="descriere">
+              Denumire produs
+            </label>
             <input
-              placeholder="Ex: Disc frana"
+              id="descriere"
               className="form-element"
-              onSubmit={this.handleSubmit}
               type="text"
               name="descriere"
+              placeholder="Ex: Disc frana"
+              required
             />
           </div>
-          <div className="form-row">
-            <label className="form-label">Pret (Ron)</label>
 
+          <div className="form-row">
+            <label className="form-label" htmlFor="pret">
+              Pret (Ron)
+            </label>
             <input
+              id="pret"
               className="form-element"
-              onSubmit={this.handleSubmit}
               type="number"
               step="0.01"
-              required
-              id="pret"
+              min="0"
               name="pret"
-            ></input>
+              required
+            />
           </div>
+
           <div className="form-row">
-            <label className="form-label" onSubmit={this.handleSubmit}>Tipul Produsului</label>
-            <select type="number" name="tipID">
-              <option value="0">Selecteaza un tip</option>
+            <label className="form-label" htmlFor="tipID">
+              Tipul Produsului
+            </label>
+            <select id="tipID" name="tipID" required>
+              <option value="">Selecteaza un tip</option>
               <option value="1">1.Electric</option>
               <option value="2">2.Mecanic</option>
             </select>
           </div>
+
           <div className="form-row">
-            <label className="form-label" onSubmit={this.handleSubmit}>
+            <label className="form-label" htmlFor="categorieID">
               Categorie
             </label>
-            <select type="number" name="categorieID">
-              <option value="0">Selecteaza o categorie</option>
+            <select id="categorieID" name="categorieID" required>
+              <option value="">Selecteaza o categorie</option>
               <option value="1">1.Sistem de franare</option>
               <option value="2">2.Sistem de ungere</option>
               <option value="3">3.Sistem de iluminare</option>
@@ -96,21 +104,26 @@ class AddForm extends React.Component {
               <option value="7">7.Elemente electrice</option>
             </select>
           </div>
+
           <div className="form-row">
-            <label className="form-label">Data Adaugarii</label>
+            <label className="form-label" htmlFor="data_Adaugarii">
+              Data Adaugarii
+            </label>
             <input
+              id="data_Adaugarii"
               className="form-element"
-              onSubmit={this.handleSubmit}
               type="datetime-local"
               name="data_Adaugarii"
+              required
             />
           </div>
+
           <div className="form-row">
-            <button onSubmit={this.handleSubmit} className="form-button">
+            <button type="submit" className="form-button">
               Send
             </button>
             <div id="status">
-              <h3> {this.state.status}</h3>
+              <h3>{this.state.status}</h3>
             </div>
           </div>
         </form>

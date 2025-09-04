@@ -1,5 +1,4 @@
 import React from "react";
-import "./AllProducts.css";
 
 const TIP = { 1: "Electric", 2: "Mecanic" };
 const CAT = {
@@ -12,14 +11,10 @@ const CAT = {
   7: "Elemente electrice",
 };
 
-class AllProducts extends React.Component {
+class AllProductsDB extends React.Component {
   state = { items: [], loading: true, error: "" };
 
   componentDidMount() {
-    this.load();
-  }
-
-  load = () => {
     fetch("http://localhost:8080/produs")
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -27,19 +22,15 @@ class AllProducts extends React.Component {
       })
       .then((items) => this.setState({ items, loading: false, error: "" }))
       .catch((e) => this.setState({ error: String(e), loading: false }));
-  };
+  }
 
   handleDelete = async (id) => {
     const prev = this.state.items;
-    // optimist update
-    this.setState({ items: prev.filter((x) => x.id !== id) });
+    this.setState({ items: prev.filter((x) => x.id !== id) }); // optimist
     try {
-      const res = await fetch(`http://localhost:8080/produs/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`http://localhost:8080/produs/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    } catch (e) {
-      // rollback dacă eșuează
+    } catch {
       this.setState({ items: prev, error: "Nu s-a putut șterge. Încearcă din nou." });
     }
   };
@@ -90,6 +81,4 @@ class AllProducts extends React.Component {
   }
 }
 
-export default AllProducts;
-
-    
+export default AllProductsDB;
