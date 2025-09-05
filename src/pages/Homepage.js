@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 function Homepage() {
     return (
         <div>
-            <Header/>
+          
             <MainCarousel/>
             <TextBlock
             title="Shop now"
@@ -37,7 +37,7 @@ function Homepage() {
 
             </div>
 
-            <Footer/>
+          
            
         </div>
     );

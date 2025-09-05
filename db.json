@@ -1,12 +1,12 @@
 {
   "produs": [
     {
-      "id": "9fc4",
-      "descriere": "Bec",
-      "pret": 44,
-      "tipID": 1,
-      "categorieID": 3,
-      "data_Adaugarii": "2025-09-04T17:40"
+      "id": "6f04",
+      "descriere": "Disc",
+      "pret": 55,
+      "tipID": 2,
+      "categorieID": 2,
+      "data_Adaugarii": "2025-09-18T09:28"
     }
   ]
 }

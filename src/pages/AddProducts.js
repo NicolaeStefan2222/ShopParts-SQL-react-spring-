@@ -7,9 +7,9 @@ import AddForm from '../components/AddForm';
 function AddProducts() {
     return (
         <div>
-            <Header />
+            
             <AddForm/>
-            <Footer />
+          
 
         </div>
     );
